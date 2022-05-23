@@ -52,12 +52,32 @@ class Contato{
             telefone: this.body.telefone
         };
     }
+
+    async edit(id){
+        if(typeof id !== 'string') return;
+        this.valida();
+        if(this.errors.length > 0) return;
+        this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true });
+    }
+
+    async deletar(id){
+        if(typeof id !== 'string') return;
+        const contato = await ContatoModel.findByIdAndDelete(id); //findOneAndDelete() busca por filtro. Ex: ContatoModel.findByIdAndDelete({ _id: id });
+        return contato;
+    }
 }
 
 const buscaPorId = async(id) => {
     if(typeof id !== 'string') return;
-    const user = await ContatoModel.findById(id);
-    return user;
+    const contato = await ContatoModel.findById(id);
+    return contato;
 }
 
-module.exports = { Contato, buscaPorId};
+const buscaContatos = async() => {
+    const contatos = await ContatoModel.find()
+        .sort({ nome: 1 });
+    return contatos;
+}
+
+
+module.exports = { Contato, buscaPorId, buscaContatos };
