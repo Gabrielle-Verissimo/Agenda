@@ -30,7 +30,7 @@ export default class Contato{
             const divEmail = el.querySelector('div[name="email-group"]');
             const span = document.createElement('span');
             span.classList.add('error-message');
-            span.innerHTML = 'e-mail inválido';
+            span.innerHTML = 'E-mail inválido';
             divEmail.appendChild(span);
             error = true;
         }
@@ -61,7 +61,6 @@ export default class Contato{
             error = true;
         }
 
-        console.log('sim');
         el.addEventListener('change', () => {
             if(nomeInput.value){
                 nomeInput.classList.remove('error');
